@@ -4,7 +4,7 @@ import XCTest
 
 final class DayInputTests: XCTestCase {
     @MainActor func testInput() throws {
-//        XCTAssertEqual(Day.solve(), .init(n1: "PSNRGBTFT", n2: "BNTZFPMMW"))
+        XCTAssertEqual(Day.solve(), .init(n1: 1766, n2: 2383))
     }
 }
 
