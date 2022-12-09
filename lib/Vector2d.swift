@@ -16,6 +16,24 @@ extension Vector2d {
 }
 
 extension Vector2d {
+    public static func +=(lhs: inout Vector2d, rhs: Vector2d) {
+        lhs = lhs + rhs
+    }
+
+    public static func +(lhs: Vector2d, rhs: Vector2d) -> Vector2d {
+        .init(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    }
+
+    public static func -=(lhs: inout Vector2d, rhs: Vector2d) {
+        lhs = lhs - rhs
+    }
+
+    public static func -(lhs: Vector2d, rhs: Vector2d) -> Vector2d {
+        .init(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+    }
+}
+
+extension Vector2d {
     public static func horizontal(from x1: Int, to x2: Int, on y: Int) -> [Vector2d] {
         (x1...x2).map { Vector2d(x: $0, y: y) }
     }
