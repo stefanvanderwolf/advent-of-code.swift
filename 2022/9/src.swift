@@ -1,13 +1,5 @@
 import AdventOfCode
 
-extension Comparable {
-    public func cmp(_ rhs: Self) -> Int {
-        if self < rhs { return -1 }
-        if self > rhs { return 1 }
-        return 0
-    }
-}
-
 @main
 public struct Day {
     public static func main() {
