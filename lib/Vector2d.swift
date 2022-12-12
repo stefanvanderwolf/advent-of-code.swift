@@ -16,6 +16,15 @@ extension Vector2d {
 }
 
 extension Vector2d {
+    public static let neighbours = [
+        Vector2d(x: +1, y: 0),
+        Vector2d(x: -1, y: 0),
+        Vector2d(x: 0, y: +1),
+        Vector2d(x: 0, y: -1)
+    ]
+}
+
+extension Vector2d {
     public static func +=(lhs: inout Vector2d, rhs: Vector2d) {
         lhs = lhs + rhs
     }
