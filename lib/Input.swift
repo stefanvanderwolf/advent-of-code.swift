@@ -79,6 +79,6 @@ public enum Input {
 
     private static func path(_ year: Int, _ day: Int) -> String {
         let home = ProcessInfo.processInfo.environment["HOME"]!
-        return "\(home)/git/advent-of-code.swift/\(year)/\(day)/input.in"
+        return "\(home)/git/advent-of-code.in/\(year)/\(day).in"
     }
 }
