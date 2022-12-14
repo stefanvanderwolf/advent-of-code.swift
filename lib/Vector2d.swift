@@ -8,6 +8,15 @@ public struct Vector2d {
     }
 }
 
+extension Vector2d {
+    public init(_ raw: String, separator: String = ",") {
+        let components = raw.split(separator: separator)
+
+        x = Int(components[0])!
+        y = Int(components[1])!
+    }
+}
+
 extension Vector2d: Hashable {}
 extension Vector2d: Equatable {}
 
