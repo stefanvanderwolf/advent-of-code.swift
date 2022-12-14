@@ -48,16 +48,15 @@ public struct Day {
             [[2]],
             [[6]],
         ]
+            .sorted { cmp($0, $1) < 0 } // Force correct order so we can append indices.
 
-        let n2 = (input + dividers)
-            .sorted { cmp($0, $1) < 0 }
+        let n2 = dividers
             .enumerated()
-            .filter { e -> Bool in
-                dividers.contains {
-                    cmp($0, e.element) == 0
-                }
+            .map { (index, divider) in
+                input
+                    .filter { cmp($0, divider) == -1 }
+                    .count + index + 1 // Append index, because dividers are "inserted".
             }
-            .map { $0.offset + 1 }
             .product
 
         return Solution(n1: n1, n2: n2)
