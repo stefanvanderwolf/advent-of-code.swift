@@ -9,6 +9,8 @@ public struct Day {
         solve().print()
     }
 
+    private static let move = #/move (?<amount>\d+) from (?<from>\d+) to (?<to>\d+)/#
+
     public static func solve() -> Solution<String, String> {
         let components = Input.Group.input(year: 2022, day: 5)
             .map { Array($0) }
@@ -32,7 +34,8 @@ public struct Day {
             }
 
         let moves = components[1]
-            .map { Scanner(string: $0).scanMove() }
+            .map { try! move.wholeMatch(in: $0)!.output }
+            .map { Move(amount: Int($0.amount)!, from: Int($0.from)!, to: Int($0.to)!) }
 
         return Solution(
             n1: moves
@@ -59,19 +62,5 @@ extension Array where Element == Move {
             $0[$1.from].removeSubrange(range)
             $0[$1.to].insert(contentsOf: characters, at: 0)
         }
-    }
-}
-
-extension Scanner {
-    fileprivate func scanMove() -> Move {
-        var move = Move(amount: 0, from: 0, to: 0)
-        _ = scanString("move")
-        scanInt(&move.amount)
-        _ = scanString("from")
-        scanInt(&move.from)
-        _ = scanString("to")
-        scanInt(&move.to)
-
-        return move
     }
 }
