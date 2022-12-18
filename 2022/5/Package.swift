@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "day",
     platforms: [
-        .macOS(.v11)
+        .macOS(.v13)
     ],
     dependencies: [
         .package(path: "../../lib"),

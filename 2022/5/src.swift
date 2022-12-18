@@ -1,11 +1,7 @@
 import AdventOfCode
 import Foundation
 
-struct Move {
-    var amount: Int
-    var from: Int
-    var to: Int
-}
+typealias Move = (amount: Int, from: Int, to: Int)
 
 @main
 public struct Day {
@@ -38,31 +34,31 @@ public struct Day {
         let moves = components[1]
             .map { Scanner(string: $0).scanMove() }
 
-        let n1 = moves
-            .reduce(into: stack) {
-                for _ in 1...$1.amount {
-                    var contents = $0[$1.from]
-                    let character = contents.removeFirst()
+        return Solution(
+            n1: moves
+                .reduce(into: stack)
+                .compactMap { $0.first }
+                .asString(),
+            n2: moves
+                .reduce(into: stack, reverse: false)
+                .compactMap { $0.first }
+                .asString()
+        )
+    }
+}
 
-
-                    $0[$1.from] = contents
-                    $0[$1.to].insert(character, at: 0)
-                }
+extension Array where Element == Move {
+    func reduce(into stack: [[Character]], reverse: Bool = true) -> [[Character]] {
+        reduce(into: stack) {
+            let range = 0..<$1.amount
+            var characters = $0[$1.from][range]
+            if reverse {
+                characters.reverse()
             }
-            .compactMap { $0.first }
 
-        let n2 = moves
-            .reduce(into: stack) {
-                let range = 0..<$1.amount
-                let characters = $0[$1.from][range]
-
-                $0[$1.from].removeSubrange(range)
-                $0[$1.to].insert(contentsOf: characters, at: 0)
-            }
-            .compactMap { $0.first }
-
-        
-        return Solution(n1: String(n1), n2: String(n2))
+            $0[$1.from].removeSubrange(range)
+            $0[$1.to].insert(contentsOf: characters, at: 0)
+        }
     }
 }
 
