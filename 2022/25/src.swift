@@ -1,6 +1,4 @@
 import AdventOfCode
-import Algorithms
-import Collections
 
 @main
 public struct Day {
